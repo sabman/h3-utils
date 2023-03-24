@@ -16,7 +16,6 @@ setup(
         # ],
     },
     author_email='saburq@gmail.com,hmushtaq720@gmail.com',
-    description='H3 Utils',
     url='https://github.com/sabman/h3_utils',
     license='MIT',
     classifiers=[

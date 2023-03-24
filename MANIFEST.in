@@ -1,0 +1,3 @@
+include README.md
+recursive-include h3_utils *.py
+recursive-exclude tests *

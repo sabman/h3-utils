@@ -9,6 +9,7 @@ setup(
     install_requires=[
         'h3==3.7.6',
         'folium',
+        'shapely==2.0.1'
     ],
     entry_points={
         # 'console_scripts': [

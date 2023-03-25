@@ -1,10 +1,26 @@
 from h3_utils import tools
 import json
 import pytest
+import requests
+import fixtures
 
 # append the parent directory to the path so that we can import the h3_utils module
 import sys
 sys.path.append(".")
+
+
+def test_find_resolution_for_geojson():
+    # url for geojson
+    url = "https://gist.githubusercontent.com/sabman/f1aee8de222c263fb0aa4d40409404e7/raw/118150c1d402d5a998a5b180731a98ac33983dad/jettyroad.geojson"
+    # load the geojson
+    geojson = requests.get(url).json()
+    # get the geometry of the first feature
+    geojson = geojson["features"][0]["geometry"]
+    # call the function
+    resolution, cells = tools.find_resolution_for_geojson(geojson, 0.85, 1)
+    # check that the resolution is 12
+    assert resolution == 12
+    assert cells == fixtures.get_cells()
 
 
 def test_find_cells_for_geojson():

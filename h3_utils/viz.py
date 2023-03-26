@@ -43,7 +43,7 @@ def visualize_polygon(polyline, color):
     return m
 
 
-def create_hexagons_map(geojson, resolution=6):
+def visualize_geojson_enclosing_cell(geojson, resolution=6):
     # Extract the coordinates from the GeoJSON feature and calculate the average center
     polyline = geojson['coordinates'][0]
     polyline = list(map(lambda v: [v[1], v[0]], polyline))
@@ -80,7 +80,7 @@ def create_hexagons_map(geojson, resolution=6):
     return m
 
 
-def create_map_with_hexagons(geojson, cells):
+def visualize_geojson_and_cells(geojson, cells):
     # extract polyline coordinates
     polyline = geojson['coordinates'][0]
     # reverse the coordinates to be [lat, lng] since geojson is [x, y] i.e [lng, lat] but folium likes [lat, lng]

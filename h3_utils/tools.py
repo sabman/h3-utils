@@ -4,17 +4,21 @@ import json
 
 
 def find_cells_for_geojson(geojson, level):
+    """find the h3 cells for a given geojson polygon and level
+
+    Args:
+        geojson (dict): dict conforming to geojson geometry spec
+        level (int): h3 resolution for which we want to find cells
+
+    Returns:
+        set, int: tuple with set of h3 cells and the level
+    """
+
     cells = h3.polyfill(geojson, level, geo_json_conformant=True)
     if len(cells):
         return cells, level
     level += 1
     return find_cells_for_geojson(geojson, level)
-
-# find the resolution that given a geojson polygon, it will return hexagons that cover the polygon with an internal threshold and an external threshold.
-# internal_threshold: is the percentage of area of the polygon that the hexagons should cover.
-# external_threshold: is the percentage of area of the hexagons that are outside the polygon.
-
-# docstring for find_resolution_for_geojson
 
 
 def find_resolution_for_geojson(

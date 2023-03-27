@@ -48,7 +48,7 @@ Here is `visualize_geojson_enclosing_cell`
 
 ![](_docs/visualize_geojson_enclosing_cell.png)
 
-find the cells and resolution for a given geojson `find_resolution_for_geojson`
+find the cells for a given geojson and coverage level using `find_resolution_for_geojson(geo_json, coverage_level)`
 
 ![](_docs/find_resolution_for_geojson.png)
 

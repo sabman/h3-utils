@@ -44,11 +44,11 @@ if resolution > 6:
 # =============================================
 ```
 
-Here is `visualize_geojson_enclosing_cell`
+Here is the cell visualized `visualize_geojson_enclosing_cell(geo_json, resolution)`.
 
 ![](_docs/visualize_geojson_enclosing_cell.png)
 
-find the cells for a given geojson and coverage level using `find_resolution_for_geojson(geo_json, coverage_level)`
+find the cells for a given geojson and coverage level using `find_resolution_for_geojson(geo_json, coverage_level)`.
 
 ![](_docs/find_resolution_for_geojson.png)
 

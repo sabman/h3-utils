@@ -43,9 +43,9 @@ def visualize_polygon(polyline, color):
     return m
 
 
-def visualize_geojson_enclosing_cell(geojson, resolution=6):
+def visualize_geojson_enclosing_cell(geo_json_dict, resolution=6):
     # Extract the coordinates from the GeoJSON feature and calculate the average center
-    polyline = geojson['coordinates'][0]
+    polyline = geo_json_dict['coordinates'][0]
     polyline = list(map(lambda v: [v[1], v[0]], polyline))
     polyline.append(polyline[0])
     lat = [p[0] for p in polyline]
@@ -60,10 +60,10 @@ def visualize_geojson_enclosing_cell(geojson, resolution=6):
     m.add_child(my_polyline)
 
     # Find the hexagons that intersect with the GeoJSON feature
-    found_hexagons, level = h3_tools.find_cells_for_geojson(geojson, 6)
+    found_hexagons, level = h3_tools.find_cells_for_geojson(geo_json_dict, resolution)
 
-    if level > 6:
-        hexagons = [h3.h3_to_parent(h, 6) for h in found_hexagons]
+    if level > resolution:
+        hexagons = [h3.h3_to_parent(h, resolution) for h in found_hexagons]
     else:
         hexagons = found_hexagons
 
@@ -80,9 +80,9 @@ def visualize_geojson_enclosing_cell(geojson, resolution=6):
     return m
 
 
-def visualize_geojson_and_cells(geojson, cells):
+def visualize_geojson_and_cells(geo_json_dict, cells):
     # extract polyline coordinates
-    polyline = geojson['coordinates'][0]
+    polyline = geo_json_dict['coordinates'][0]
     # reverse the coordinates to be [lat, lng] since geojson is [x, y] i.e [lng, lat] but folium likes [lat, lng]
     polyline = list(map(lambda v: [v[1], v[0]], polyline))
     polyline.append(polyline[0])

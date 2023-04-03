@@ -127,7 +127,7 @@ def _cells2boundary(cells: set) -> shapely.geometry.Polygon:
 
 
 def _remove_cells_not_intersecting_geojson(cells: set, geo_json: dict) -> set:
-    """Remove cells that don't contain the geo_json"""
+    """Remove cells that don't intersect the geo_json"""
     cells_to_remove = set()
     for cell in cells:
         cell_polygon = _cells2boundary(set([cell]))

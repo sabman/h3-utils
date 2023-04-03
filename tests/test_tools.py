@@ -61,3 +61,11 @@ def test_find_cells_for_geojson_level_too_small():
     assert isinstance(cells, set)
     assert len(cells) > 0
     assert level == 9
+
+def test_find_enclosing_cells():
+    with open("tests/data/councils/Maribyrnong-polygon.geojson") as f:
+        geo_json = json.load(f)
+        # get the geometry of the first feature
+        geo_json = geo_json["features"][0]["geometry"]
+
+    print(tools.find_enclosing_cells(geo_json, 6))

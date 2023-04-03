@@ -74,3 +74,5 @@ def test_find_enclosing_cells():
 
     cells, rings = tools.find_enclosing_cells(geo_json, 6)
     assert cells == expected_cells
+
+    # TODO: test the case where the geojson is more than one ring

@@ -73,7 +73,6 @@ def find_enclosing_cells(geo_json: dict, level: int) -> tuple:
         set, int: tuple with set of h3 cells and the level
     """
     # initial cells
-
     cells, _level = find_cells_for_geojson(geo_json, level)
     initial_cell = list(cells)[0]
     if _level > level:
@@ -82,14 +81,14 @@ def find_enclosing_cells(geo_json: dict, level: int) -> tuple:
         # append the initial cell to the cells
         cells.add(initial_cell)
 
-    # print(cells, level)
     cells_from_ring, ring_no = _find_ring_containing_geojson(
         initial_cell, geo_json)
-    # remove the cells from the ring that don't contain the geo_json
-    cells_from_ring = _remove_cells_not_containing_geojson(
+
+    # remove cells that don't intersect the geo_json
+    cells_from_ring = _remove_cells_not_intersecting_geojson(
         cells_from_ring, geo_json)
 
-    return (cells_from_ring, ring_no)
+    return cells_from_ring, ring_no
 
 
 def _find_ring_containing_geojson(cell: str, geo_json: dict) -> tuple:
@@ -127,7 +126,7 @@ def _cells2boundary(cells: set) -> shapely.geometry.Polygon:
     return merged_boundary
 
 
-def _remove_cells_not_containing_geojson(cells: set, geo_json: dict) -> set:
+def _remove_cells_not_intersecting_geojson(cells: set, geo_json: dict) -> set:
     """Remove cells that don't contain the geo_json"""
     cells_to_remove = set()
     for cell in cells:

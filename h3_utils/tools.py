@@ -82,7 +82,7 @@ def find_enclosing_cells(geo_json: dict, level: int) -> tuple:
         # append the initial cell to the cells
         cells.add(initial_cell)
 
-    print(cells, level)
+    # print(cells, level)
     cells_from_ring, ring_no = _find_ring_containing_geojson(
         initial_cell, geo_json)
     # remove the cells from the ring that don't contain the geo_json
@@ -125,6 +125,7 @@ def _cells2boundary(cells: set) -> shapely.geometry.Polygon:
         json.dumps(merged_boundary_geojson)
     )
     return merged_boundary
+
 
 def _remove_cells_not_containing_geojson(cells: set, geo_json: dict) -> set:
     """Remove cells that don't contain the geo_json"""

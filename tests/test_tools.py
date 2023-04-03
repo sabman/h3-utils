@@ -47,13 +47,15 @@ def test_find_cells_for_geojson():
     assert level == 10
 
 # test when the polygon doesn't fit in the level
+
+
 def test_find_cells_for_geojson_level_too_small():
     # load a geojson file
     with open("tests/data/councils/holdfastbay/jettyroad.geojson") as f:
         geojson = json.load(f)
         # get the geometry of the first feature
         geojson = geojson["features"][0]["geometry"]
-    
+
     # Call the function with the polygon and a level of 6
     cells, level = tools.find_cells_for_geojson(geojson, 6)
 
@@ -62,10 +64,13 @@ def test_find_cells_for_geojson_level_too_small():
     assert len(cells) > 0
     assert level == 9
 
+
 def test_find_enclosing_cells():
     with open("tests/data/councils/Maribyrnong-polygon.geojson") as f:
         geo_json = json.load(f)
-        # get the geometry of the first feature
         geo_json = geo_json["features"][0]["geometry"]
 
-    print(tools.find_enclosing_cells(geo_json, 6))
+    expected_cells = {'86be6356fffffff', '86be630b7ffffff', '86be6354fffffff'}
+
+    cells, rings = tools.find_enclosing_cells(geo_json, 6)
+    assert cells == expected_cells

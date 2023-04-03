@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='h3_utils',
-    version='0.1.1',
+    version='0.1.2',
     description='H3 Utils',
     author='Shoaib & Hassan',
     packages=find_packages(),

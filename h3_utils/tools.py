@@ -57,6 +57,8 @@ def find_resolution_for_geojson(
         return resolution, cells
     else:
         resolution += 1
+        if resolution == 16: # should stop at this point
+            return resolution, cells
         return find_resolution_for_geojson(
             geojson, internal_area_ratio, resolution
         )

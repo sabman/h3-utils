@@ -76,3 +76,14 @@ def test_find_enclosing_cells():
     assert cells == expected_cells
 
     # TODO: test the case where the geojson is more than one ring
+
+def test_find_resolution_for_geojson_too_small():
+    with open("tests/data/very_small_area.geojson") as f:
+        geo_json = json.load(f)
+        geo_json = geo_json["features"][0]["geometry"]
+
+    # call the function
+    resolution, cells = tools.find_resolution_for_geojson(geo_json, 1.0, 14)
+    # check that the resolution is 15
+    assert resolution == 15
+    assert cells == fixtures.get_tiny_cells()

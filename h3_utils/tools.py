@@ -35,6 +35,11 @@ def find_resolution_for_geojson(
     """
     # starting resolution for search
     cells, resolution = find_cells_for_geojson(geojson, starting_resolution)
+    
+    # base case where search level has reached the max possible H3 resolution
+    # NOTE: find_cells_for_geojson could throw an exception which we don't handle currently (something to think about)
+    if resolution == MAX_RES:
+        return resolution, cells
 
     # h3_set_to_multi_polygon
     cells_polygon = h3.h3_set_to_multi_polygon(cells, geo_json=True)
@@ -58,8 +63,6 @@ def find_resolution_for_geojson(
         return resolution, cells
     else:
         resolution += 1
-        if resolution > MAX_RES: # base case
-            return MAX_RES, cells
         return find_resolution_for_geojson(
             geojson, internal_area_ratio, resolution
         )

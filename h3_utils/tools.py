@@ -2,6 +2,7 @@ import h3
 import shapely
 import json
 
+MAX_RES = 15
 
 def find_cells_for_geojson(geojson, level):
     """find the h3 cells for a given geojson polygon and level
@@ -34,6 +35,11 @@ def find_resolution_for_geojson(
     """
     # starting resolution for search
     cells, resolution = find_cells_for_geojson(geojson, starting_resolution)
+    
+    # base case where search level has reached the max possible H3 resolution
+    # NOTE: find_cells_for_geojson could throw an exception which we don't handle currently (something to think about)
+    if resolution == MAX_RES:
+        return resolution, cells
 
     # h3_set_to_multi_polygon
     cells_polygon = h3.h3_set_to_multi_polygon(cells, geo_json=True)
